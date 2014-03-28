@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>Page</h1>
+	<button id="update-local-storage">Update Local Storage</button>
+	<button id="show-title">Show Local Storage Data</button>
+	<button id="clear-title">Clear Local Storage Data</button>
+	<div id="error"></div>
+
+	<script type="text/javascript" src="jquery-2.1.0.min.js"></script>
+	<script type="text/javascript">
+		window.onerror = function(msg, url, line) {
+			message = 'JSError : ' + msg + ' ' + url + ':' + line;
+			$('#error').html(message);
+			JSHelper.log_(message);
+		};
+
+		$(document).ready(function(){
+			$('#clear-title').click(function(){
+				localStorage.removeItem('sampleTitle');
+			});
+
+			$('#show-title').click(function(){
+				$('h1').html(localStorage.sampleTitle);
+			});
+
+			$('#update-local-storage').click(function(){
+				localStorage.sampleTitle = JSHelper.getSampleTitle();
+				JSHelper.log_('key creating for localStorage...');
+			});
+		});
+	</script>
+</body>
+</html>
